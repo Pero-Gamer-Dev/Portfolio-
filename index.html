@@ -216,6 +216,8 @@
             border-radius: 8px;
             border-top: 4px solid var(--accent-color);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
         }
 
         .project-card:hover {
@@ -232,6 +234,7 @@
             list-style: square inside;
             color: var(--text-muted);
             margin-bottom: 1.5rem;
+            flex-grow: 1; /* Pushes tags/buttons to the bottom */
         }
 
         .project-card li {
@@ -246,11 +249,28 @@
             background-color: rgba(85, 255, 85, 0.1);
             color: var(--accent-color);
             border-radius: 4px;
+            align-self: flex-start;
         }
 
-        .status.progress {
-            background-color: rgba(255, 170, 0, 0.1);
-            color: #ffaa00; /* Minecraft Gold */
+        /* Link button style for external links (Modrinth) */
+        .project-link {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            font-family: var(--pixel-font);
+            font-size: 1.2rem;
+            background-color: rgba(85, 255, 85, 0.15);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            margin-top: 1rem;
+            text-align: center;
+            transition: all 0.2s ease;
+            align-self: flex-start;
+        }
+
+        .project-link:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
         }
 
         /* === Contact Section === */
@@ -276,7 +296,12 @@
             border: 2px solid #334155;
             border-radius: 8px;
             font-family: var(--pixel-font);
-            font-size: 1.5rem;
+            font-size: 1.4rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-color);
         }
 
         /* === Footer === */
@@ -304,6 +329,11 @@
             }
             .section-title {
                 font-size: 2rem;
+            }
+            .contact-card {
+                width: 100%;
+                padding: 1rem;
+                font-size: 1.2rem;
             }
         }
     </style>
@@ -355,34 +385,34 @@
         <div class="projects-grid">
             
             <div class="project-card">
+                <h3>WatchdogBanSystem</h3>
+                <p>An advanced moderation plugin providing comprehensive tools to manage and secure your Minecraft server.</p>
+                <ul>
+                    <li>Advanced player moderation features</li>
+                    <li>Customizable ban/mute UI & messages</li>
+                    <li>Detailed punishment history & tracking</li>
+                </ul>
+                <a href="https://modrinth.com/plugin/watchdogbansystem" target="_blank" class="project-link">View on Modrinth &rarr;</a>
+            </div>
+
+            <div class="project-card">
+                <h3>OP Titles</h3>
+                <p>A feature-rich and highly customizable title plugin designed to capture your players' attention.</p>
+                <ul>
+                    <li>Extensive configuration options</li>
+                    <li>Advanced formatting and color support</li>
+                    <li>Custom triggers and automated timers</li>
+                </ul>
+                <a href="https://modrinth.com/plugin/op-titles" target="_blank" class="project-link">View on Modrinth &rarr;</a>
+            </div>
+
+            <div class="project-card">
                 <h3>Peropixel Network</h3>
                 <p>A full-scale custom Minecraft server network featuring interconnected game modes and a global economy.</p>
                 <ul>
-                    <li>Custom Skyblock Systems</li>
-                    <li>Tiered Ore Generators</li>
-                    <li>Cross-server Syncing</li>
-                </ul>
-                <span class="status">Status: Completed</span>
-            </div>
-
-            <div class="project-card">
-                <h3>CoreEssentials Plugin</h3>
-                <p>An all-in-one, highly optimized essential commands and chat formatting plugin designed for Paper servers.</p>
-                <ul>
-                    <li>0.01ms Impact on TPS</li>
-                    <li>Hex Color Chat Support</li>
-                    <li>Dynamic Config Reloads</li>
-                </ul>
-                <span class="status progress">Status: In Progress</span>
-            </div>
-
-            <div class="project-card">
-                <h3>DungeonGen Engine</h3>
-                <p>A procedural dungeon generation API built on top of the Spigot API, creating unique boss rooms and loot chests.</p>
-                <ul>
-                    <li>Custom NBT Tags for Loot</li>
-                    <li>Asynchronous Chunk Loading</li>
-                    <li>API for other developers</li>
+                    <li>Custom Server Architecture</li>
+                    <li>Backend Plugin Integration</li>
+                    <li>Cross-server Syncing & Optimization</li>
                 </ul>
                 <span class="status">Status: Completed</span>
             </div>
@@ -393,11 +423,11 @@
     <section id="contact">
         <div class="container">
             <h2 class="section-title">Let's Connect</h2>
-            <p>Looking for a developer for your next big server project? Drop me a message.</p>
+            <p>Looking for a developer for your next big server project or need custom plugins? Drop me a message.</p>
             <div class="contact-links">
-                <a href="#" class="contact-card">Discord: perogamer#1234</a>
-                <a href="#" class="contact-card">GitHub: /PeroGamer</a>
-                <a href="mailto:contact@perogamer.dev" class="contact-card">Email Me</a>
+                <a href="#" class="contact-card">Discord: zapnapxd_64007</a>
+                <a href="https://github.com/Pero-Gamer-Dev" target="_blank" class="contact-card">GitHub: /Pero-Gamer-Dev</a>
+                <a href="mailto:peroperogamer172@gmail.com" class="contact-card">Email: peroperogamer172@gmail.com</a>
             </div>
         </div>
     </section>
@@ -408,4 +438,4 @@
     </footer>
 
 </body>
-  </html>
+    </html>
