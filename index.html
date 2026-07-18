@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pero Gamer | Minecraft Developer</title>
+    <title>Pero | Minecraft Developer</title>
     
+    <!-- Import a pixel-style font for headers and a clean modern font for text -->
     <link href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;600&display=swap" rel="stylesheet">
 
     <style>
@@ -161,10 +162,10 @@
             background-color: var(--accent-color);
             color: var(--bg-color);
             box-shadow: 2px 2px 0px #000;
-            transform: translate(2px, 2px); /* Click depression effect */
+            transform: translate(2px, 2px);
         }
 
-        /* === About Section === */
+        /* === About & Stats Section === */
         #about .about-content {
             display: flex;
             flex-direction: column;
@@ -179,13 +180,51 @@
             font-weight: 600;
         }
 
+        /* New Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            margin-top: 3rem;
+        }
+
+        .stat-box {
+            background-color: var(--card-bg);
+            padding: 1.5rem 1rem;
+            border-radius: 8px;
+            border-bottom: 4px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-num {
+            font-family: var(--pixel-font);
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            line-height: 1;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
         /* === Skills Section === */
         .skills-grid {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 1rem;
-            margin-top: 2rem;
+            margin-top: 1rem;
         }
 
         .skill-tag {
@@ -234,11 +273,15 @@
             list-style: square inside;
             color: var(--text-muted);
             margin-bottom: 1.5rem;
-            flex-grow: 1; /* Pushes tags/buttons to the bottom */
+            flex-grow: 1;
         }
 
         .project-card li {
             margin-bottom: 0.5rem;
+        }
+
+        .project-card li strong {
+            color: var(--text-main);
         }
 
         .status {
@@ -252,7 +295,11 @@
             align-self: flex-start;
         }
 
-        /* Link button style for external links (Modrinth) */
+        .status.progress {
+            background-color: rgba(255, 170, 0, 0.1);
+            color: #ffaa00; /* Minecraft Gold */
+        }
+
         .project-link {
             display: inline-block;
             padding: 0.4rem 1rem;
@@ -319,7 +366,7 @@
         /* === Responsive Design (Mobile Support) === */
         @media (max-width: 768px) {
             .nav-links {
-                display: none; /* Hide links on small screens for simplicity */
+                display: none;
             }
             #hero h1 {
                 font-size: 3rem;
@@ -340,8 +387,9 @@
 </head>
 <body>
 
+    <!-- Navigation Bar -->
     <nav>
-        <div class="logo">&gt;_ PeroGamer</div>
+        <div class="logo">&gt;_ Pero</div>
         <ul class="nav-links">
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About</a></li>
@@ -351,25 +399,55 @@
         </ul>
     </nav>
 
+    <!-- Hero Section -->
     <header id="home">
-        <h1>Pero Gamer</h1>
+        <h1>Pero</h1>
         <h2>Minecraft Plugin & Server Developer</h2>
         <p>Building custom, optimized, and immersive Minecraft experiences from the ground up.</p>
         <a href="#projects" class="mc-btn">View My Work</a>
     </header>
 
+    <!-- About Section -->
     <section id="about" class="container">
         <h2 class="section-title">About Me</h2>
         <div class="about-content">
-            <p>Hey there! I'm a passionate developer specializing in the Minecraft ecosystem. I create robust backend systems, engaging gameplay loops, and highly optimized server environments.</p>
-            <p>With deep experience in <span class="highlight">Java (Spigot/Paper API)</span>, intricate <span class="highlight">YAML Configs</span>, and professional server deployment using <span class="highlight">Pterodactyl & VPS hosting</span>, I bring blocky ideas to life.</p>
+            <p>Hey there! I'm <span class="highlight">Pero</span>. I specialize in building robust backend systems, engaging gameplay loops, and highly optimized server environments within the Minecraft ecosystem.</p>
+            <p>With <span class="highlight">3+ years</span> of deep Minecraft development experience and <span class="highlight">1+ years</span> of broad coding experience (Java, Python, HTML), I bring blocky ideas to life—from intricate YAML Configs to professional VPS and Pterodactyl deployments.</p>
+            
+            <!-- Statistics Grid -->
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-num">3+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">80+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">50+</div>
+                    <div class="stat-label">Servers Developed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">30+</div>
+                    <div class="stat-label">Plugins Developed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">10+</div>
+                    <div class="stat-label">Networks Built</div>
+                </div>
+            </div>
         </div>
     </section>
 
+    <!-- Skills Section -->
     <section id="skills" class="container">
         <h2 class="section-title">Technical Skills</h2>
+        <p style="text-align: center; margin-bottom: 2rem;">1+ Years General Coding Experience</p>
         <div class="skills-grid">
             <div class="skill-tag">Java</div>
+            <div class="skill-tag">Python</div>
+            <div class="skill-tag">HTML</div>
             <div class="skill-tag">Spigot API</div>
             <div class="skill-tag">Paper API</div>
             <div class="skill-tag">Plugin Development</div>
@@ -380,10 +458,12 @@
         </div>
     </section>
 
+    <!-- Projects Section -->
     <section id="projects" class="container">
         <h2 class="section-title">Featured Projects</h2>
         <div class="projects-grid">
             
+            <!-- Project Card 1: WatchdogBanSystem -->
             <div class="project-card">
                 <h3>WatchdogBanSystem</h3>
                 <p>An advanced moderation plugin providing comprehensive tools to manage and secure your Minecraft server.</p>
@@ -395,6 +475,7 @@
                 <a href="https://modrinth.com/plugin/watchdogbansystem" target="_blank" class="project-link">View on Modrinth &rarr;</a>
             </div>
 
+            <!-- Project Card 2: OP Titles -->
             <div class="project-card">
                 <h3>OP Titles</h3>
                 <p>A feature-rich and highly customizable title plugin designed to capture your players' attention.</p>
@@ -406,20 +487,22 @@
                 <a href="https://modrinth.com/plugin/op-titles" target="_blank" class="project-link">View on Modrinth &rarr;</a>
             </div>
 
+            <!-- Project Card 3: Active Networks -->
             <div class="project-card">
-                <h3>Peropixel Network</h3>
-                <p>A full-scale custom Minecraft server network featuring interconnected game modes and a global economy.</p>
+                <h3>Current Networks</h3>
+                <p>Actively developing and maintaining backend systems for large-scale Minecraft networks.</p>
                 <ul>
-                    <li>Custom Server Architecture</li>
-                    <li>Backend Plugin Integration</li>
-                    <li>Cross-server Syncing & Optimization</li>
+                    <li><strong>FuryPixel:</strong> Custom Network Development</li>
+                    <li><strong>Peropixel:</strong> Custom Network Development</li>
+                    <li><strong>Bloxpixel:</strong> Custom Network Development</li>
                 </ul>
-                <span class="status">Status: Completed</span>
+                <span class="status progress">Status: In Progress</span>
             </div>
 
         </div>
     </section>
 
+    <!-- Contact Section -->
     <section id="contact">
         <div class="container">
             <h2 class="section-title">Let's Connect</h2>
@@ -432,9 +515,10 @@
         </div>
     </section>
 
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2026 Pero Gamer. All rights reserved.</p>
-        <p>Made with <span>❤️</span> by Pero Gamer</p>
+        <p>&copy; 2026 Pero. All rights reserved.</p>
+        <p>Made with <span>❤️</span> by Pero</p>
     </footer>
 
 </body>
