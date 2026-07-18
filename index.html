@@ -180,7 +180,7 @@
             font-weight: 600;
         }
 
-        /* New Stats Grid */
+        /* Stats Grid */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
@@ -269,6 +269,11 @@
             margin-bottom: 1rem;
         }
 
+        .project-card p.project-desc {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
         .project-card ul {
             list-style: square inside;
             color: var(--text-muted);
@@ -293,11 +298,17 @@
             color: var(--accent-color);
             border-radius: 4px;
             align-self: flex-start;
+            margin-top: auto;
         }
 
         .status.progress {
             background-color: rgba(255, 170, 0, 0.1);
             color: #ffaa00; /* Minecraft Gold */
+        }
+
+        .status.premium {
+            background-color: rgba(85, 255, 255, 0.1);
+            color: #55ffff; /* Minecraft Aqua/Diamond */
         }
 
         .project-link {
@@ -363,7 +374,7 @@
             color: #ff5555; /* Minecraft Red */
         }
 
-        /* === Responsive Design (Mobile Support) === */
+        /* === Responsive Design === */
         @media (max-width: 768px) {
             .nav-links {
                 display: none;
@@ -463,10 +474,34 @@
         <h2 class="section-title">Featured Projects</h2>
         <div class="projects-grid">
             
-            <!-- Project Card 1: WatchdogBanSystem -->
+            <!-- Project Card 1: Skyblock Core -->
+            <div class="project-card" style="border-top-color: #55ffff;">
+                <h3 style="color: #55ffff;">Skyblock Core</h3>
+                <p class="project-desc">A highly sophisticated, Hypixel-inspired engine. Built as a modular ecosystem of individually connected plugins rather than a single monolithic file, serving as a unified database and mechanics hub.</p>
+                <ul>
+                    <li>Custom Profiles & Island Systems</li>
+                    <li>Economy, Minions & Crafting</li>
+                    <li>Custom Items & Weapons</li>
+                </ul>
+                <span class="status premium">Premium / Buyable Plugin</span>
+            </div>
+
+            <!-- Project Card 2: MemoryHeist -->
+            <div class="project-card" style="border-top-color: #55ffff;">
+                <h3 style="color: #55ffff;">MemoryHeist</h3>
+                <p class="project-desc">An intense, event-driven mini-game where players compete to collect memory fragments before the time runs out.</p>
+                <ul>
+                    <li>Memory collection & stealing mechanics</li>
+                    <li>Dynamic in-game events</li>
+                    <li>Configurable time limits & rulesets</li>
+                </ul>
+                <span class="status premium">Premium / Buyable Plugin</span>
+            </div>
+
+            <!-- Project Card 3: WatchdogBanSystem -->
             <div class="project-card">
                 <h3>WatchdogBanSystem</h3>
-                <p>An advanced moderation plugin providing comprehensive tools to manage and secure your Minecraft server.</p>
+                <p class="project-desc">An advanced moderation plugin providing comprehensive tools to manage and secure your Minecraft server.</p>
                 <ul>
                     <li>Advanced player moderation features</li>
                     <li>Customizable ban/mute UI & messages</li>
@@ -475,10 +510,10 @@
                 <a href="https://modrinth.com/plugin/watchdogbansystem" target="_blank" class="project-link">View on Modrinth &rarr;</a>
             </div>
 
-            <!-- Project Card 2: OP Titles -->
+            <!-- Project Card 4: OP Titles -->
             <div class="project-card">
                 <h3>OP Titles</h3>
-                <p>A feature-rich and highly customizable title plugin designed to capture your players' attention.</p>
+                <p class="project-desc">A feature-rich and highly customizable title plugin designed to capture your players' attention.</p>
                 <ul>
                     <li>Extensive configuration options</li>
                     <li>Advanced formatting and color support</li>
@@ -487,10 +522,10 @@
                 <a href="https://modrinth.com/plugin/op-titles" target="_blank" class="project-link">View on Modrinth &rarr;</a>
             </div>
 
-            <!-- Project Card 3: Active Networks -->
+            <!-- Project Card 5: Active Networks -->
             <div class="project-card">
                 <h3>Current Networks</h3>
-                <p>Actively developing and maintaining backend systems for large-scale Minecraft networks.</p>
+                <p class="project-desc">Actively developing and maintaining backend systems for large-scale Minecraft networks.</p>
                 <ul>
                     <li><strong>FuryPixel:</strong> Custom Network Development</li>
                     <li><strong>Peropixel:</strong> Custom Network Development</li>
