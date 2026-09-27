@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pero | Minecraft Developer</title>
+    
+    <!-- Import a pixel-style font for headers and a clean modern font for text -->
+    <link href="https://fonts.googleapis.com/css2?family=VT323&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+
+    <style>
+        /* === CSS Variables & Theming === */
+        :root {
+            --bg-color: #0f172a;        /* Modern dark slate */
+            --card-bg: #1e293b;         /* Slightly lighter slate for cards */
+            --accent-color: #55ff55;    /* Minecraft Green */
+            --text-main: #e2e8f0;       /* Off-white for readability */
+            --text-muted: #94a3b8;      /* Greyed out text */
+            --pixel-font: 'VT323', monospace;
+            --main-font: 'Inter', sans-serif;
+        }
+
+        /* === Base Reset & Typography === */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth; /* Smooth scroll navigation */
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: var(--main-font);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: var(--pixel-font);
+            color: var(--accent-color);
+            letter-spacing: 1px;
+            text-shadow: 2px 2px 0px #000; /* Minecraft text shadow effect */
+        }
+
+        p {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            margin-bottom: 1rem;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s;
+        }
+
+        a:hover {
+            color: #fff;
+        }
+
+        /* === Navigation Bar === */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(15, 23, 42, 0.95);
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            border-bottom: 2px solid var(--card-bg);
+            backdrop-filter: blur(5px);
+        }
+
+        .logo {
+            font-family: var(--pixel-font);
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-family: var(--pixel-font);
+            font-size: 1.3rem;
+            color: var(--text-main);
+        }
+
+        .nav-links a:hover {
+            color: var(--accent-color);
+        }
+
+        /* === Reusable Container === */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            border-bottom: 2px dashed var(--card-bg);
+            padding-bottom: 1rem;
+        }
+
+        /* === Hero Section === */
+        #home {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: radial-gradient(circle at center, #1e293b 0%, #0f172a 100%);
+            padding: 0 2rem;
+        }
+
+        #home h1 {
+            font-size: 4.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #home h2 {
+            font-size: 2rem;
+            color: var(--text-main);
+            margin-bottom: 1.5rem;
+            text-shadow: none;
+        }
+
+        #home p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        /* Minecraft-Style Button */
+        .mc-btn {
+            display: inline-block;
+            padding: 0.8rem 2rem;
+            font-family: var(--pixel-font);
+            font-size: 1.5rem;
+            background-color: transparent;
+            color: var(--accent-color);
+            border: 2px solid var(--accent-color);
+            cursor: pointer;
+            box-shadow: 4px 4px 0px #000;
+            transition: all 0.2s ease;
+        }
+
+        .mc-btn:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+            box-shadow: 2px 2px 0px #000;
+            transform: translate(2px, 2px);
+        }
+
+        /* === About & Stats Section === */
+        #about .about-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .highlight {
+            color: var(--text-main);
+            font-weight: 600;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+            width: 100%;
+            margin-top: 3rem;
+        }
+
+        .stat-box {
+            background-color: var(--card-bg);
+            padding: 1.5rem 1rem;
+            border-radius: 8px;
+            border-bottom: 4px solid var(--accent-color);
+            transition: transform 0.3s ease;
+        }
+
+        .stat-box:hover {
+            transform: translateY(-5px);
+        }
+
+        .stat-num {
+            font-family: var(--pixel-font);
+            font-size: 3.5rem;
+            color: var(--accent-color);
+            line-height: 1;
+            text-shadow: 2px 2px 0px #000;
+        }
+
+        .stat-label {
+            font-size: 0.95rem;
+            color: var(--text-main);
+            margin-top: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        /* === Skills Section === */
+        .skills-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .skill-tag {
+            background-color: var(--card-bg);
+            border-left: 4px solid var(--accent-color);
+            padding: 0.8rem 1.5rem;
+            font-family: var(--pixel-font);
+            font-size: 1.3rem;
+            border-radius: 4px;
+            transition: transform 0.3s;
+        }
+
+        .skill-tag:hover {
+            transform: translateY(-5px);
+            background-color: #2a3b52;
+        }
+
+        /* === Projects Section === */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: var(--card-bg);
+            padding: 2rem;
+            border-radius: 8px;
+            border-top: 4px solid var(--accent-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .project-card h3 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .project-card p.project-desc {
+            margin-bottom: 1rem;
+            font-size: 1rem;
+        }
+
+        .project-card ul {
+            list-style: square inside;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+        }
+
+        .project-card li {
+            margin-bottom: 0.5rem;
+        }
+
+        .project-card li strong {
+            color: var(--text-main);
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            font-family: var(--pixel-font);
+            font-size: 1.1rem;
+            background-color: rgba(85, 255, 85, 0.1);
+            color: var(--accent-color);
+            border-radius: 4px;
+            align-self: flex-start;
+            margin-top: auto;
+        }
+
+        .status.progress {
+            background-color: rgba(255, 170, 0, 0.1);
+            color: #ffaa00; /* Minecraft Gold */
+        }
+
+        .status.premium {
+            background-color: rgba(85, 255, 255, 0.1);
+            color: #55ffff; /* Minecraft Aqua/Diamond */
+        }
+
+        .project-link {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            font-family: var(--pixel-font);
+            font-size: 1.2rem;
+            background-color: rgba(85, 255, 85, 0.15);
+            color: var(--accent-color);
+            border: 1px solid var(--accent-color);
+            border-radius: 4px;
+            margin-top: 1rem;
+            text-align: center;
+            transition: all 0.2s ease;
+            align-self: flex-start;
+        }
+
+        .project-link:hover {
+            background-color: var(--accent-color);
+            color: var(--bg-color);
+        }
+
+        .project-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.6rem;
+            margin-top: 1rem;
+        }
+
+        /* === Contact Section === */
+        #contact {
+            text-align: center;
+            background-color: var(--card-bg);
+            border-top: 2px solid #000;
+            border-bottom: 2px solid #000;
+            padding: 4rem 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-card {
+            background-color: var(--bg-color);
+            padding: 1.5rem 3rem;
+            border: 2px solid #334155;
+            border-radius: 8px;
+            font-family: var(--pixel-font);
+            font-size: 1.4rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .contact-card:hover {
+            border-color: var(--accent-color);
+        }
+
+        /* === Footer === */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            background-color: var(--bg-color);
+            color: var(--text-muted);
+        }
+
+        footer span {
+            color: #ff5555; /* Minecraft Red */
+        }
+
+        /* === Responsive Design === */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            #home h1 {
+                font-size: 3rem;
+            }
+            #home h2 {
+                font-size: 1.5rem;
+            }
+            .section-title {
+                font-size: 2rem;
+            }
+            .contact-card {
+                width: 100%;
+                padding: 1rem;
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav>
+        <div class="logo">&gt;_ Pero</div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header id="home">
+        <h1>Pero</h1>
+        <h2>Minecraft Plugin &amp; Server Developer</h2>
+        <p>Building custom, optimized, and immersive Minecraft experiences from the ground up — from modular Skyblock cores to full-scale Hypixel-style networks.</p>
+        <a href="#projects" class="mc-btn">View My Work</a>
+    </header>
+
+    <!-- About Section -->
+    <section id="about" class="container">
+        <h2 class="section-title">About Me</h2>
+        <div class="about-content">
+            <p>Hey there! I'm <span class="highlight">Pero</span>. I specialize in designing robust backend systems, engaging gameplay loops, and highly optimized server environments within the Minecraft ecosystem. My focus spans Hypixel-style remakes, custom Skyblock engines, mini-MMO survival mechanics, and production-ready plugin architecture.</p>
+            <p>With <span class="highlight">3+ years</span> of deep Minecraft development experience and <span class="highlight">1+ years</span> of broader software engineering (Java, Python, HTML), I deliver end-to-end solutions — from intricate YAML configurations and modular plugin ecosystems to professional Linux VPS and Pterodactyl deployments.</p>
+            
+            <!-- Statistics Grid -->
+            <div class="stats-grid">
+                <div class="stat-box">
+                    <div class="stat-num">3+</div>
+                    <div class="stat-label">Years Experience</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">80+</div>
+                    <div class="stat-label">Projects Completed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">50+</div>
+                    <div class="stat-label">Servers Developed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">30+</div>
+                    <div class="stat-label">Plugins Developed</div>
+                </div>
+                <div class="stat-box">
+                    <div class="stat-num">10+</div>
+                    <div class="stat-label">Networks Built</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="container">
+        <h2 class="section-title">Technical Skills</h2>
+        <p style="text-align: center; margin-bottom: 2rem;">1+ Years General Coding Experience • 3+ Years Minecraft Development</p>
+        <div class="skills-grid">
+            <div class="skill-tag">Java</div>
+            <div class="skill-tag">Python</div>
+            <div class="skill-tag">HTML / CSS</div>
+            <div class="skill-tag">Spigot API</div>
+            <div class="skill-tag">Paper API</div>
+            <div class="skill-tag">Plugin Development</div>
+            <div class="skill-tag">Server Optimization</div>
+            <div class="skill-tag">Config Design (YAML)</div>
+            <div class="skill-tag">Pterodactyl Panel</div>
+            <div class="skill-tag">Linux VPS</div>
+            <div class="skill-tag">Network Architecture</div>
+            <div class="skill-tag">Custom Mechanics</div>
+            <div class="skill-tag">Hypixel-style Systems</div>
+            <div class="skill-tag">Modular Plugin Design</div>
+            <div class="skill-tag">Auction / Economy Systems</div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="container">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            
+            <!-- Skyblock Core -->
+            <div class="project-card" style="border-top-color: #55ffff;">
+                <h3 style="color: #55ffff;">Skyblock Core (SB-CORE)</h3>
+                <p class="project-desc">A production-grade, Hypixel-inspired Skyblock engine built as a modular ecosystem of interconnected plugins rather than a single monolithic file. Serves as a unified profiles, economy, and mechanics hub powering multiple live networks.</p>
+                <ul>
+                    <li>Custom player profiles &amp; island systems</li>
+                    <li>Economy, minions, crafting &amp; collections</li>
+                    <li>Custom items, weapons &amp; ability framework</li>
+                    <li>Powers Peropixel Network and other Skyblock servers</li>
+                </ul>
+                <span class="status premium">Premium / Buyable Plugin</span>
+            </div>
+
+            <!-- PeroAH -->
+            <div class="project-card" style="border-top-color: #55ffff;">
+                <h3 style="color: #55ffff;">PeroAH</h3>
+                <p class="project-desc">Professional Auction House + BidWar plugin designed for high-traffic servers. Features a complete listing system, real-time bidding wars, mail claiming, search, admin tools, and Vault integration.</p>
+                <ul>
+                    <li>Full Auction House with sell / buy / search</li>
+                    <li>BidWar system with live bidding events</li>
+                    <li>Player mail &amp; claim system</li>
+                    <li>Extensive admin controls &amp; permissions</li>
+                </ul>
+                <div class="project-links">
+                    <a href="PeroAH-1.0.0.jar" class="project-link" download>Download JAR</a>
+                </div>
+                <span class="status premium">Premium Plugin • v1.0.0</span>
+            </div>
+
+            <!-- Lava Core -->
+            <div class="project-card" style="border-top-color: #55ffff;">
+                <h3 style="color: #55ffff;">Lava Core</h3>
+                <p class="project-desc">Custom high-performance server core (1.21.4) built with Fabric Loom and mixin architecture. Provides optimized bridging, player handling, and foundation services for modern Minecraft networks.</p>
+                <ul>
+                    <li>1.21.4 Fabric-based core</li>
+                    <li>Advanced player &amp; server bridging</li>
+                    <li>Performance-focused architecture</li>
+                    <li>BETA release for production testing</li>
+                </ul>
+                <div class="project-links">
+                    <a href="lava-core-1.0.1-BETA.jar" class="project-link" download>Download JAR</a>
+                </div>
+                <span class="status premium">Core • v1.0.1-BETA</span>
+            </div>
+
+            <!-- MemoryHeist -->
+            <div class="project-card" style="border-top-color: #55ffff;">
+                <h3 style="color: #55ffff;">MemoryHeist</h3>
+                <p class="project-desc">An intense, event-driven mini-game where players compete to collect and steal memory fragments under time pressure. Fully configurable rulesets and dynamic in-game events.</p>
+                <ul>
+                    <li>Memory collection &amp; stealing mechanics</li>
+                    <li>Dynamic event system</li>
+                    <li>Configurable timers &amp; scoring</li>
+                </ul>
+                <span class="status premium">Premium / Buyable Plugin</span>
+            </div>
+
+            <!-- WatchdogBanSystem -->
+            <div class="project-card">
+                <h3>WatchdogBanSystem</h3>
+                <p class="project-desc">Advanced moderation suite providing comprehensive tools for managing and securing Minecraft servers with detailed punishment history and customizable interfaces.</p>
+                <ul>
+                    <li>Advanced player moderation tools</li>
+                    <li>Customizable ban / mute UI &amp; messages</li>
+                    <li>Detailed punishment history &amp; tracking</li>
+                </ul>
+                <a href="https://modrinth.com/plugin/watchdogbansystem" target="_blank" class="project-link">View on Modrinth →</a>
+            </div>
+
+            <!-- OP Titles -->
+            <div class="project-card">
+                <h3>OP Titles</h3>
+                <p class="project-desc">Feature-rich and highly customizable title plugin engineered to capture player attention with advanced formatting, triggers, and automated timing systems.</p>
+                <ul>
+                    <li>Extensive configuration options</li>
+                    <li>Advanced formatting &amp; color support</li>
+                    <li>Custom triggers &amp; automated timers</li>
+                </ul>
+                <a href="https://modrinth.com/plugin/op-titles" target="_blank" class="project-link">View on Modrinth →</a>
+            </div>
+
+            <!-- Completed Networks -->
+            <div class="project-card">
+                <h3>Completed Networks</h3>
+                <p class="project-desc">Fully delivered production networks with complete backend systems, custom gameplay, and long-term maintainability.</p>
+                <ul>
+                    <li><strong>FuryPixel</strong> — Hypixel remake Skyblock network</li>
+                    <li><strong>Bloxpixel</strong> — Hypixel remake Skyblock network</li>
+                    <li><strong>Nexora Network</strong> — Full Hypixel-style remake server</li>
+                    <li><strong>Peropixel Network</strong> — Skyblock powered by SB-CORE</li>
+                </ul>
+                <span class="status">Status: Completed</span>
+            </div>
+
+            <!-- Crackpixel -->
+            <div class="project-card" style="border-top-color: #ffaa00;">
+                <h3 style="color: #ffaa00;">Crackpixel</h3>
+                <p class="project-desc">Large-scale Hypixel remake network featuring Housing, Ranked BedWars, classic BedWars, and Duels. Currently expanding the platform with a full custom Skyblock mode.</p>
+                <ul>
+                    <li>Housing system</li>
+                    <li>Ranked BedWars &amp; classic BedWars</li>
+                    <li>Duels</li>
+                    <li>Crackpixel Skyblock (actively in development)</li>
+                </ul>
+                <span class="status progress">Status: In Progress</span>
+            </div>
+
+            <!-- ZenithMc -->
+            <div class="project-card" style="border-top-color: #ffaa00;">
+                <h3 style="color: #ffaa00;">ZenithMc</h3>
+                <p class="project-desc">Multi-mode network offering Survival, Lifesteal, and BedWars. Currently focused on building a rich custom Survival experience with mini-MMO style mechanics and unique progression systems.</p>
+                <ul>
+                    <li>Custom Survival (mini-MMO mechanics)</li>
+                    <li>Lifesteal mode</li>
+                    <li>BedWars</li>
+                </ul>
+                <span class="status progress">Status: In Progress</span>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact">
+        <div class="container">
+            <h2 class="section-title">Let's Connect</h2>
+            <p>Looking for a developer for your next large-scale network or need custom plugins and cores? Reach out — I'm available for commissions and long-term collaborations.</p>
+            <div class="contact-links">
+                <a href="#" class="contact-card">Discord: zapnapxd_64007</a>
+                <a href="https://github.com/Pero-Gamer-Dev" target="_blank" class="contact-card">GitHub: /Pero-Gamer-Dev</a>
+                <a href="mailto:peroperogamer172@gmail.com" class="contact-card">Email: peroperogamer172@gmail.com</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Pero. All rights reserved.</p>
+        <p>Made with <span>❤️</span> by Pero</p>
+    </footer>
+
+</body>
+</html>
